@@ -12,7 +12,7 @@ public class ContractProduct {
 	private String productDesc;//货物描述
 	private Integer cnumber;//数量
 	private Integer outNumber;//出货数量
-	private String loadingRaye;//装率
+	private String loadingRate;//装率
 	private String boxNum;//箱数
 	private String packingUnit;//包装单位
 	private Double price;//单价
@@ -74,11 +74,12 @@ public class ContractProduct {
 	public void setOutNumber(Integer outNumber) {
 		this.outNumber = outNumber;
 	}
-	public String getLoadingRaye() {
-		return loadingRaye;
+	
+	public String getLoadingRate() {
+		return loadingRate;
 	}
-	public void setLoadingRaye(String loadingRaye) {
-		this.loadingRaye = loadingRaye;
+	public void setLoadingRate(String loadingRate) {
+		this.loadingRate = loadingRate;
 	}
 	public String getBoxNum() {
 		return boxNum;

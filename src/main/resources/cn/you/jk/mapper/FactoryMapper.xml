@@ -31,6 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="find" parameterType="map" resultMap="factoryRM">  
         select * from factory_c  
         where 1=1  
+        <if test="state!=null">
+        	and STATE=#{state}
+        </if>
+        
     </select>
     
     <!-- 新增Oracle jdbc驱动当这个值为null时,必须告诉它当前字段默认值的类型jdbcType=varchar(mybatis定义），mysql不用写 -->
