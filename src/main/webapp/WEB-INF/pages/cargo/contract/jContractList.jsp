@@ -61,7 +61,7 @@
 		<td class="tableHeader">船期</td>
 		<td class="tableHeader">总金额</td>
 		<td class="tableHeader">状态</td>
-		
+		<td class="tableHeader">操作</td> 
 	</tr>
 	</thead>
 	<tbody class="tableBody" >
@@ -83,6 +83,7 @@
 			<span style="color: green;"><c:if test="${o.state==1 }">已上报</c:if></span>
 			<span style="color: red;"><c:if test="${o.state==0 }">草稿</c:if></span>
 		</td>
+		<td><a href="${ctx}/cargo/contractproduct/tocreate.action?contractId=${o.id}" title="新增货物信息">[货物]</a><td>
 	</tr>
 	</c:forEach>
 	

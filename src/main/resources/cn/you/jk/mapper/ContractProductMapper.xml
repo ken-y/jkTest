@@ -25,5 +25,75 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="orderNo" column="ORDER_NO"/> 
 	</resultMap>
 	
+	<!-- 查询 -->
+	<select id="find" parameterType="map" resultMap="ContractProductRM">
+		select * from contract_product_c
+		where 1=1
+		<if test="state!=null"> and STATE=#{state}</if>
+	</select>
+	
+	<!-- 删除一条 -->
+	<delete id="deleteById" parameterType="string">
+		delete from contract_product_c
+		where contract_product_id=#{id}
+	</delete>
+	
+	<insert id="insert" parameterType="cn.you.jk.domain.ContractProduct">
+		insert into contract_product_c
+		 (CONTRACT_PRODUCT_ID,CONTRACT_ID,FACTORY_ID,FACTORY_NAME,PRODUCT_NO,  
+            PRODUCT_IMAGE,PRODUCT_DESC,CNUMBER,OUT_NUMBER,LOADING_RATE,BOX_NUM,  
+            PACKING_UNIT,PRICE,AMOUNT,FINISHED,EXTS,ORDER_NO)  
+        values(  
+            #{id},  
+            #{contractId},  
+            #{factoryId},  
+            #{factoryName, jdbcType=VARCHAR},  
+            #{productNo, jdbcType=VARCHAR},  
+            #{productImage, jdbcType=VARCHAR},  
+            #{productDesc, jdbcType=VARCHAR},  
+            #{cnumber, jdbcType=INTEGER},  
+            #{outNumber, jdbcType=INTEGER},  
+            #{loadingRate, jdbcType=VARCHAR},  
+            #{boxNum, jdbcType=INTEGER},  
+            #{packingUnit, jdbcType=VARCHAR},  
+            #{price, jdbcType=DOUBLE},  
+            #{amount, jdbcType=DOUBLE},  
+            #{finished, jdbcType=INTEGER},  
+            #{exts, jdbcType=VARCHAR},  
+            #{orderNo, jdbcType=INTEGER}  
+        )  
+	</insert>
+	
+	<update id="update" parameterType="cn.you.jk.domain.ContractProduct">
+		update contract_product_c
+		<set>
+			CONTACT_ID=#{contractId},
+			FACTORY_ID=#{factoryId},
+			<if test="factoryName != null">FACTORY_NAME=#{factoryName},</if>  
+            <if test="productNo != null">PRODUCT_NO=#{productNo},</if>  
+            <if test="productImage != null">PRODUCT_IMAGE=#{productImage},</if>  
+            <if test="productDesc != null">PRODUCT_DESC=#{productDesc},</if>  
+            <if test="cnumber != null">CNUMBER=#{cnumber},</if>  
+            <if test="outNumber != null">OUT_NUMBER=#{outNumber},</if>  
+            <if test="loadingRate != null">LOADING_RATE=#{loadingRate},</if>  
+            <if test="boxNum != null">BOX_NUM=#{boxNum},</if>  
+            <if test="packingUnit != null">PACKING_UNIT=#{packingUnit},</if>  
+            <if test="price != null">PRICE=#{price},</if>  
+            <if test="amount != null">AMOUNT=#{amount},</if>  
+            <if test="finished != null">FINISHED=#{finished},</if>  
+            <if test="exts != null">EXTS=#{exts},</if>  
+            <if test="orderNo != null">ORDER_NO=#{orderNo},</if>  
+		</set>
+		where contract_product_id=#{id}
+	</update>
+	
+	<!-- 删除多条 -->
+	<delete id="delete" parameterType="string">
+		delete from contract_product_c
+		where contract_product_id=#{id} in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
 	
 </mapper>

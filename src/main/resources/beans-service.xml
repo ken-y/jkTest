@@ -17,5 +17,6 @@
             <!-- 加载service-->   
         <bean name="factoryService" class="cn.you.jk.service.impl.FactoryServiceImpl"/>  
         <bean name="contractService" class="cn.you.jk.service.impl.ContractServiceImpl"/> 
+        <bean name="contractProductService" class="cn.you.jk.service.impl.ContractProductServiceImpl"/> 
       
 </beans>  

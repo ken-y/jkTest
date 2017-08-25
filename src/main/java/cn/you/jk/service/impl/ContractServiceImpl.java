@@ -15,7 +15,7 @@ import cn.you.jk.domain.Contract;
 import cn.you.jk.pagination.Page;
 import cn.you.jk.service.ContractService;
 
-@Service
+@Service("contractService")
 public class ContractServiceImpl implements ContractService{
 
 	@Resource
