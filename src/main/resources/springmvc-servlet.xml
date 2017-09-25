@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 			
 	<!-- 1.扫描controller包 -->  
-    <context:component-scan base-package="cn.you.jk.controller"/>  
+    <context:component-scan base-package="cn.you.jk.controller"/>   
       
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/images/**" location="/images/" />

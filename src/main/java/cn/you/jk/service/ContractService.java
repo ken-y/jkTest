@@ -6,6 +6,7 @@ import java.util.Map;
 
 import cn.you.jk.domain.Contract;
 import cn.you.jk.pagination.Page;
+import cn.you.jk.vo.ContractVO;
 
 public interface ContractService  {
 
@@ -19,5 +20,6 @@ public interface ContractService  {
 	
 	public void submit(Serializable[] ids);//上报
 	public void cancel(Serializable[] ids);//取消
+	public ContractVO view(String contractId);//带关联对象的查询
 	
 }

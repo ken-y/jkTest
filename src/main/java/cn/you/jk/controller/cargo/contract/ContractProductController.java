@@ -33,6 +33,7 @@ public class ContractProductController extends BaseController{
 		List<Factory> factoryList=factoryService.getFactoryList();
 		model.addAttribute("factoryList", factoryList);
 		
+		
 		//某个合同下的货物
 		Map paraMap=new HashMap<>();
 		paraMap.put("contractId", contractId);
@@ -49,5 +50,31 @@ public class ContractProductController extends BaseController{
 		return "redirect:/cargo/contractproduct/tocreate.action";
 	}
 	
+	//专项修改也迷上你
+	@RequestMapping("/cargo/contractproduct/toupdate.action")
+	public String toupdate(String id,Model model){
+		ContractProduct obj=contractProductService.get(id);
+		model.addAttribute("obj",obj);
+		//准备生产厂家的下拉列表
+		List<Factory> factoryList=factoryService.getFactoryList();
+		model.addAttribute("factoryList", factoryList);
+		return "/cargo/contract/jContractProductUpdate.jsp";//货物修改页面
+	}
+	
+	//修改
+	@RequestMapping("/cargo/contractproduct/update.action")
+	public String toupdate(ContractProduct contractProduct,Model model){
+		contractProductService.update(contractProduct);
+		
+		model.addAttribute("contractId",contractProduct.getContractId());
+		
+		return "redirect:/cargo/contractproduct/tocreate.action";
+	}
 
+	@RequestMapping("/cargo/contractproduct/deleteById.action")
+	public String delete(String contractId,String id ,Model model){
+		contractProductService.deleteById(id);
+		
+		return "redirect:/cargo/contractproduct/tocreate.action";
+	}
 }

@@ -7,6 +7,10 @@ public class Contract {
 	private String id;  
     private String offeror;//收购方  
     private String contractNo;//合同编号  
+    
+    private String cpnum;
+    private String extnum;
+    
     private java.util.Date signingDate;//签单日期  
     private String inputBy;//制单人  
     private String checkBy;//审单人  
@@ -40,6 +44,18 @@ public class Contract {
 	}
 	public void setOfferor(String offeror) {
 		this.offeror = offeror;
+	}
+	public String getCpnum() {
+		return cpnum;
+	}
+	public void setCpnum(String cpnum) {
+		this.cpnum = cpnum;
+	}
+	public String getExtnum() {
+		return extnum;
+	}
+	public void setExtnum(String extnum) {
+		this.extnum = extnum;
 	}
 	public String getContractNo() {
 		return contractNo;

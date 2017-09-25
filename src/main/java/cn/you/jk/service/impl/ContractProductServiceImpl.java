@@ -9,11 +9,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import cn.you.jk.Util.UtilFuns;
 import cn.you.jk.dao.ContractProductDao;
 import cn.you.jk.domain.ContractProduct;
 import cn.you.jk.pagination.Page;
 import cn.you.jk.service.ContractProductService;
+import cn.you.jk.util.UtilFuns;
 
 @Service("contractProductService")
 public class ContractProductServiceImpl implements ContractProductService {
@@ -66,15 +66,26 @@ public class ContractProductServiceImpl implements ContractProductService {
 
 	@Override
 	public void deleteById(Serializable id) {
-		// TODO Auto-generated method stub
+		//删除一个
+		Serializable[] ids={id};
+		try{
+			//先删除所有货物下的附件
+			contractProductDao.deleteByContractProductById(ids);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		contractProductDao.deleteById(id);
 		
 	}
 
 	@Override
 	public void delete(Serializable[] ids) {
-		// TODO Auto-generated method stub
-		
+		try{
+			//先删除所有货物下的附件
+			contractProductDao.deleteByContractProductById(ids);
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}
+		contractProductDao.delete(ids);
 	}
-	
-	
 }

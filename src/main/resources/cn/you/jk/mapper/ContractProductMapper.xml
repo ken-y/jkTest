@@ -32,6 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="contractId !=null"> and contract_Id=#{contractId}</if>
 	</select>
 	
+	<select id="get" parameterType="string" resultMap="ContractProductRM">
+		select * from contract_product_c
+		where contract_product_id=#{pid}
+	</select>
+	
 	<!-- 删除一条 -->
 	<delete id="deleteById" parameterType="string">
 		delete from contract_product_c
@@ -67,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="cn.you.jk.domain.ContractProduct">
 		update contract_product_c
 		<set>
-			CONTACT_ID=#{contractId},
+			CONTRACT_ID=#{contractId},
 			FACTORY_ID=#{factoryId},
 			<if test="factoryName != null">FACTORY_NAME=#{factoryName},</if>  
             <if test="productNo != null">PRODUCT_NO=#{productNo},</if>  
@@ -94,6 +99,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
+	</delete>
+	
+	<delete id="deleteByContractProductById" parameterType="string">
+		delete from ext_cproduct_c
+		where contract_product_id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>	
 	</delete>
 	
 </mapper>

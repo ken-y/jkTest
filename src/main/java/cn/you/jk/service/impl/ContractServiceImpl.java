@@ -9,11 +9,13 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import cn.you.jk.dao.ContractDao;
 import cn.you.jk.domain.Contract;
 import cn.you.jk.pagination.Page;
 import cn.you.jk.service.ContractService;
+import cn.you.jk.vo.ContractVO;
 
 @Service("contractService")
 public class ContractServiceImpl implements ContractService{
@@ -53,11 +55,36 @@ public class ContractServiceImpl implements ContractService{
 
 	@Override
 	public void deleteById(Serializable id) {
+		Serializable[] ids={id};
+		try {
+			//删除合同是删除合同货物下的所有附件
+			contractDao.deleteExtByContractById(ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			contractDao.deleteByContractById(ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		contractDao.deleteById(id);
 	}
 
 	@Override
 	public void delete(Serializable[] ids) {
+		try {
+			//删除合同是删除合同货物下的所有附件
+			contractDao.deleteExtByContractById(ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+		try {
+			//删除合同时同时删除合同下的货物
+			contractDao.deleteByContractById(ids);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		contractDao.delete(ids);
 	}
 
@@ -77,6 +104,12 @@ public class ContractServiceImpl implements ContractService{
 		map.put("state", 0);   //0取消
 		map.put("ids", ids);
 		contractDao.updateState(map);
+	}
+
+	@Override
+	public ContractVO view(String contractId) {
+		
+		return contractDao.view(contractId);
 	}
 
 	
